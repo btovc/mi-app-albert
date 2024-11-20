@@ -1,5 +1,5 @@
 apiVersion: v2
-name: my-nginx-app
+name: mi-app-albert
 description: Helm Chart para desplegar la aplicación nginx
 type: application
 version: 1.0.0
