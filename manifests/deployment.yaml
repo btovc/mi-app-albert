@@ -17,10 +17,10 @@ spec:
       initContainers:
       - name: fix-permissions
         image: busybox
-        command: ["sh", "-c", "chmod -R 755 /usr/share/nginx/html"]
+        command: ["sh", "-c", "chmod -R 777 /usr/share/nginx/html"]
         volumeMounts:
         - name: html-volume
-          mountPath: /usr/share/nginx/html
+          mountPath: /usr/share/nginx/html  # Ruta donde Nginx sirve los archivos HTML
       containers:
       - name: nginx
         image: nginx:latest
@@ -35,4 +35,5 @@ spec:
           repository: https://github.com/btovc/mi-app-albert.git  # URL de tu repositorio
           revision: main  # La rama que quieras usar
           directory: html  # Directorio en tu repositorio que contiene index.html
+
 
