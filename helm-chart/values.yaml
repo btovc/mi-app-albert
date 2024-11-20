@@ -1,1 +1,15 @@
+replicas: 2
+
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30008
+
+configMap:
+  indexContent: "<h1>¡Bienvenido a mi aplicación nginx!</h1>"
 
