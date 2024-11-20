@@ -19,3 +19,12 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html  # Ruta donde Nginx sirve los archivos HTML
+      volumes:
+      - name: html-volume
+        gitRepo:
+          repository: https://github.com/btovc/mi-app-albert.git  # URL de tu repositorio
+          revision: main  # La rama que quieras usar
+          directory: html  # Directorio en tu repositorio que contiene index.html
