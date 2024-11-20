@@ -3,5 +3,5 @@ name: mi-app-albert
 description: Helm Chart para desplegar la aplicación nginx
 type: application
 version: 1.0.0
-appVersion: 1.0.0
+appVersion: 1.27.2
 
