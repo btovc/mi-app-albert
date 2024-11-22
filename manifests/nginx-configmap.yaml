@@ -71,6 +71,7 @@ data:
         <div class="content">
             <h3>Bienvenido a mi proyecto</h3>
             <p>Esta página ha sido desplegada en un clúster de <strong> Kubernetes </strong> utilizando <strong> ArgoCD </strong> y está alojada en <strong> GitHub </strong>.</p>
+            <p>Puedes visitar la url Github <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación y descarga de la app </a> para más información.</p> 
             
             <h3>¿Qué es Kubernetes?</h3>
             <p>Kubernetes es un sistema de gestión de contenedores que permite automatizar el despliegue, escalado y la operación de aplicaciones en contenedores. Proporciona herramientas para gestionar clústeres de contenedores, asegurando que las aplicaciones estén disponibles y escalables según la demanda.</p>
