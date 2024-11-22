@@ -70,7 +70,7 @@ data:
     <div class="container">
         <div class="content">
             <h2>Bienvenido a mi proyecto</h2>
-            <p>Esta es una pagina desplegada con</strong>ARGOCD<strong>en Kubernetes</strong> subida en github</p>
+            <p>Esta es una pagina desplegada con</strong> ARGOCD <strong> en Kubernetes </strong> subida en github</p>
             
             <h3>¿Qué es Kubernetes?</h3>
             <p>Kubernetes es un sistema de gestión de contenedores que permite automatizar el despliegue, escalado y la operación de aplicaciones en contenedores. Proporciona herramientas para gestionar clústeres de contenedores, asegurando que las aplicaciones estén disponibles y escalables según la demanda.</p>
