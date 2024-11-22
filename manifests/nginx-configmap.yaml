@@ -19,7 +19,7 @@ data:
                 background-color: #f4f4f4;
             }
             header {
-                background: #B2472D;
+                background: #993D27;
                 color: white;
                 padding: 10px 0;
                 text-align: center;
@@ -45,7 +45,7 @@ data:
             footer {
                 text-align: center;
                 padding: 10px 0;
-                background: #B2472D;
+                background: #993D27;
                 color: white;
                 position: relative;
                 bottom: 0;
