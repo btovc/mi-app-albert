@@ -10,7 +10,7 @@ data:
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Proyecto de Fin de Curso - ASIR</title>
+        <title>Proyecto de Fin de Curso ARGOCD - ASIR</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -63,14 +63,14 @@ data:
     <body>
 
     <header>
-        <h1>Proyecto de Fin de Curso - ASIR</h1>
-        <h2>Demostración de Kubernetes</h2>
+        <h1>ARGOCD y Github</h1>
+        <h2>Demostración de ARGOCD</h2>
     </header>
 
     <div class="container">
         <div class="content">
             <h2>Bienvenido a mi proyecto</h2>
-            <p>En este proyecto de fin de curso para el ciclo formativo de <strong>Administración de Sistemas Informáticos en Red (ASIR)</strong>, se presenta una introducción a <strong>Kubernetes</strong>, una plataforma de orquestación de contenedores que facilita la gestión y el despliegue de aplicaciones en entornos distribuidos.</p>
+            <p>Esta es una pagina desplegada con</strong>ARGOCD<strong>en Kubernetes</strong> subida en github</p>
             
             <h3>¿Qué es Kubernetes?</h3>
             <p>Kubernetes es un sistema de gestión de contenedores que permite automatizar el despliegue, escalado y la operación de aplicaciones en contenedores. Proporciona herramientas para gestionar clústeres de contenedores, asegurando que las aplicaciones estén disponibles y escalables según la demanda.</p>
@@ -92,7 +92,7 @@ data:
     </div>
 
     <footer>
-        <p>&copy; 2024 Proyecto ASIR - Todos los derechos reservados.</p>
+        <p>&copy; 2024 Proyecto ASIR - Todos los derechos reservados. Alberto Vázquez</p>
     </footer>
 
     </body>
