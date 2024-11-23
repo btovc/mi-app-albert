@@ -17,27 +17,31 @@ jobs:
     - name: Leer la versión desde el archivo VERSION
       id: version
       run: |
+        # Verificar si el archivo VERSION existe
         if [ -f VERSION ]; then
           VERSION=$(cat VERSION)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
         else
-          echo "El archivo VERSION no existe"
+          echo "El archivo VERSION no existe, saliendo..."
           exit 1
         fi
 
-    - name: Crear changelog dinámico (opcional)
+    - name: Crear changelog dinámico
       id: changelog
       run: |
+        # Crear un changelog simple
         echo "Actualización a la versión ${{ env.VERSION }}: Mejora en la carga de imágenes y optimización de la página de inicio." > changelog.txt
         echo "Changelog generado: $(cat changelog.txt)"
 
     - name: Hacer commit y push de los cambios
       run: |
+        # Configurar git
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add manifests/deployment.yaml
         git commit -m "Actualización a la versión ${{ env.VERSION }} con cambios."
         git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }} --token ${{ secrets.GH_TOKEN }}
+
 
 
 
