@@ -26,11 +26,6 @@ jobs:
         echo "Actualización a la versión ${{ env.VERSION }}: Mejora en la carga de imágenes y optimización de la página de inicio." > changelog.txt
         echo "Changelog generado: $(cat changelog.txt)"
 
-    - name: Actualizar deployment.yaml con la nueva versión y changelog
-      run: |
-        sed -i "s/version: .*/version: ${{ env.VERSION }}/" manifests/deployment.yaml
-        sed -i "s/changelog: .*/changelog: '$(cat changelog.txt)'/" manifests/deployment.yaml
-
     - name: Hacer commit y push de los cambios
       run: |
         git config user.name "github-actions[bot]"
