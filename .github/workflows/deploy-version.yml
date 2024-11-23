@@ -18,7 +18,7 @@ jobs:
           VERSION=$(cat VERSION)
           echo "Versión actual: $VERSION"
           NEW_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."$3+1}')
-          echo "Nueva versión: $NEW_VERSION" > VERSION
+          echo "$NEW_VERSION" > VERSION
           echo "Nueva versión: $NEW_VERSION"
 
       - name: Commit y Push de la nueva versión
@@ -31,6 +31,7 @@ jobs:
           git add VERSION
           git commit -m "Actualización de la versión a $(cat VERSION)"
           git push origin main
+
 
 
 
