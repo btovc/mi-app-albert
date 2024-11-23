@@ -1,36 +1,53 @@
-name: Incrementar versión automáticamente
+name: Update Version
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - '**/*' # Escucha cambios en cualquier archivo del repositorio
 
 jobs:
   update-version:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v3
+    - name: Checkout del repositorio
+      uses: actions/checkout@v3
 
-      - name: Leer y actualizar la versión
-        run: |
-          VERSION=$(cat VERSION)
-          echo "Versión actual: $VERSION"
-          NEW_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."$3+1}')
-          echo "$NEW_VERSION" > VERSION
-          echo "Nueva versión: $NEW_VERSION"
+    - name: Leer la versión actual
+      id: read-version
+      run: |
+        if [ ! -f VERSION ]; then
+          echo "1.0.0" > VERSION
+        fi
+        echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+      shell: bash
 
-      - name: Commit y Push de la nueva versión
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
-          git add VERSION
-          git commit -m "Actualización de la versión a $(cat VERSION)"
-          git push origin main
+    - name: Incrementar la versión
+      id: bump-version
+      run: |
+        CURRENT_VERSION=$(cat VERSION)
+        echo "Versión actual: $CURRENT_VERSION"
+        IFS='.' read -r -a VERSION_PARTS <<< "$CURRENT_VERSION"
+        PATCH=${VERSION_PARTS[2]}
+        PATCH=$((PATCH + 1))
+        NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
+        echo "Nueva versión: $NEW_VERSION"
+        echo $NEW_VERSION > VERSION
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Commit y Push de la nueva versión
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
+        git add VERSION
+        git commit -m "Actualización de la versión a $(cat VERSION)"
+        git push origin main
+      shell: bash
+
 
 
 
