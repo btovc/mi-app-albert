@@ -3,43 +3,35 @@ name: Incrementar versión automáticamente
 on:
   push:
     branches:
-      - main  # Ejecutar cuando se hagan cambios en el branch principal
+      - main
 
 jobs:
   update-version:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout del repositorio
-      uses: actions/checkout@v3
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
 
-    - name: Leer y actualizar versión
-      run: |
-        # Leer la versión actual
-        if [ -f VERSION ]; then
-          version=$(cat VERSION)
-        else
-          version="1.0.0"
-        fi
+      - name: Leer y actualizar la versión
+        run: |
+          VERSION=$(cat VERSION)
+          echo "Versión actual: $VERSION"
+          NEW_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."$3+1}')
+          echo "Nueva versión: $NEW_VERSION" > VERSION
+          echo "Nueva versión: $NEW_VERSION"
 
-        # Incrementar el número de parche
-        IFS='.' read -r major minor patch <<< "$version"
-        patch=$((patch + 1))
-        new_version="$major.$minor.$patch"
-        
-        # Guardar la nueva versión
-        echo "$new_version" > VERSION
-        echo "Nueva versión generada: $new_version"
+      - name: Commit y Push de la nueva versión
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
+          git add VERSION
+          git commit -m "Actualización de la versión a $(cat VERSION)"
+          git push origin main
 
-    - name: Commit y Push de la nueva versión
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add VERSION
-        git commit -m "Actualización de la versión a $(cat VERSION)"
-        git push origin main
 
 
 
