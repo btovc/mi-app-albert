@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'VERSION'
-      - 'manifests/**'  # Para asegurarse de que si cambian los manifiestos, también se actualice.
+      - 'manifests/**'  # Asegúrate de que si cambian los manifiestos, también se actualice.
 
 jobs:
   update-deployment:
@@ -18,10 +18,11 @@ jobs:
       id: version
       run: |
         VERSION=$(cat VERSION)
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "VERSION=$VERSION" >> $GITHUB_ENV  # Pasar la versión a las variables de entorno.
 
-    - name: Actualizar el deployment.yaml con la nueva versión
+    - name: Actualizar deployment.yaml con la nueva versión
       run: |
+        # Actualizamos las anotaciones version y changelog en deployment.yaml
         sed -i "s/version: .*/version: ${{ env.VERSION }}/" manifests/deployment.yaml
         sed -i "s/changelog: .*/changelog: 'Actualización a la versión ${{ env.VERSION }}. Cambios: ...'/" manifests/deployment.yaml
 
@@ -32,4 +33,5 @@ jobs:
         git add manifests/deployment.yaml
         git commit -m "Actualización a la versión ${{ env.VERSION }} con cambios."
         git push
+
 
