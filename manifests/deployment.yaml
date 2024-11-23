@@ -4,6 +4,10 @@ metadata:
   name: nginx-deployment
   labels:
     app: nginx
+    version: "v1.0.1"
+    changelog: |
+      - Mejoras en el rendimiento de la página de inicio.
+      - Se corrigió un error en la carga de imágenes.
 spec:
   replicas: 2
   selector:
