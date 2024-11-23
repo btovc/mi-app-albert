@@ -3,12 +3,10 @@ name: Actualizar versión y changelog
 on:
   push:
     paths:
-      - 'VERSION'
       - 'manifests/**'
       - 'nginx-configmap.yaml'
       - 'service.yaml'
-      - 'CHANGELOG.md'
-
+   
 jobs:
   update-version:
     runs-on: ubuntu-latest
