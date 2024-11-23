@@ -37,16 +37,17 @@ jobs:
       shell: bash
 
     - name: Commit y Push de la nueva versión
-      env:
-        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
+        git remote set-url origin https://github.com/${{ github.repository }}
         git add VERSION
-        git commit -m "Actualización de la versión a $(cat VERSION)"
+        git commit -m "Actualización de la versión a ${{ env.NEW_VERSION }}"
         git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: bash
+
 
 
 
