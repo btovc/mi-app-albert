@@ -1,56 +1,55 @@
-name: Actualizar la versión en el archivo VERSION
+name: Actualizar versión y changelog
 
 on:
   push:
     paths:
-      - 'VERSION'  # Detecta cambios en el archivo VERSION
-      - 'manifests/**'  # Detecta cambios en archivos en la carpeta manifests (si los hubiera)
+      - 'VERSION'
+      - 'manifests/**'
+      - 'configmaps.yaml'
+      - 'CHANGELOG.md'
 
 jobs:
   update-version:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Chequear el código
-      uses: actions/checkout@v3
+      # Paso 1: Chequear el código
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
 
-    - name: Leer la versión desde el archivo VERSION
-      id: version
-      run: |
-        VERSION=$(cat VERSION)
-        echo "VERSION=${VERSION}" >> $GITHUB_ENV  # Guardar la versión como variable de entorno
+      # Paso 2: Leer la versión desde el archivo VERSION
+      - name: Leer versión desde el archivo VERSION
+        id: version
+        run: |
+          VERSION=$(cat VERSION)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Incrementar la versión
-      id: increment-version
-      run: |
-        # Extraer el número de versión (esperamos algo como 1.0.0)
-        VERSION_MAJOR=$(echo ${{ env.VERSION }} | cut -d '.' -f1)
-        VERSION_MINOR=$(echo ${{ env.VERSION }} | cut -d '.' -f2)
-        VERSION_PATCH=$(echo ${{ env.VERSION }} | cut -d '.' -f3)
-        
-        # Incrementar la versión en el último número (patch)
-        VERSION_PATCH=$((VERSION_PATCH + 1))
+      # Paso 3: Incrementar la versión (por ejemplo, incrementar el patch)
+      - name: Incrementar versión
+        id: increment
+        run: |
+          IFS='.' read -r major minor patch <<< "${{ env.VERSION }}"
+          patch=$((patch + 1))
+          new_version="${major}.${minor}.${patch}"
+          echo "Nueva versión: $new_version"
+          echo "$new_version" > VERSION
+          echo "VERSION=$new_version" >> $GITHUB_ENV
 
-        # Crear la nueva versión
-        NEW_VERSION="${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
-        
-        echo "Nueva versión: ${NEW_VERSION}"  # Ver el cambio
+      # Paso 4: Generar el changelog
+      - name: Generar changelog
+        id: changelog
+        run: |
+          echo "Actualización a la versión ${{ env.VERSION }}: Cambios en configuración y mejoras" > CHANGELOG.md
+          echo "Changelog generado: $(cat CHANGELOG.md)"
 
-        # Guardar la nueva versión en la variable de entorno
-        echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
+      # Paso 5: Hacer commit y push de los cambios
+      - name: Commit y Push de cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION CHANGELOG.md
+          git commit -m "Actualización a la versión ${{ env.VERSION }} con cambios en configuraciones"
+          git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }} --token ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Guardar la nueva versión en el archivo VERSION
-      run: |
-        # Actualizar el archivo VERSION con la nueva versión
-        echo "${{ env.NEW_VERSION }}" > VERSION
-
-    - name: Hacer commit y push de la nueva versión
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add VERSION
-        git commit -m "Actualización de la versión a ${{ env.NEW_VERSION }}"
-        git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }} --token ${{ secrets.GH_TOKEN }}
 
 
 
