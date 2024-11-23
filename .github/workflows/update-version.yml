@@ -28,8 +28,18 @@ jobs:
 
     - name: Actualizar deployment.yaml con la nueva versión y changelog
       run: |
-        sed -i "s/version: .*/version: ${{ env.VERSION }}/" manifests/deployment.yaml
-        sed -i "s/changelog: .*/changelog: '$(cat changelog.txt)'/" manifests/deployment.yaml
+        # Actualizar la versión
+        sed -i "s/version: .*/version: \"${{ env.VERSION }}\"/" manifests/deployment.yaml
+
+        # Actualizar el changelog, manejar múltiples líneas
+        awk -v changelog="$(cat changelog.txt)" '
+          BEGIN { found = 0 }
+          /changelog: \|/ { found = 1 }
+          found && /- / { print "    changelog: |"; found = 2 }
+          found == 2 { print "      " $0 }
+          found == 2 && !/^- / { print changelog; found = 3 }
+          { print }
+        ' manifests/deployment.yaml > temp.yaml && mv temp.yaml manifests/deployment.yaml
 
     - name: Actualizar repositorio local
       run: |
@@ -44,5 +54,6 @@ jobs:
         git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # El token se pasa de manera segura
+
 
 
