@@ -1,57 +1,47 @@
-name: Actualizar versión
+name: Update Version
 
 on:
   push:
-    branches:
-      - main  # Se ejecuta cuando haya cambios en la rama main
-  workflow_dispatch:  # Permite ejecutar el workflow manualmente desde la web de GitHub
+    paths:
+      - 'VERSION'
 
 jobs:
-  update-version:
-    runs-on: ubuntu-latest  # El trabajo se ejecuta en un runner de Ubuntu
-
-    permissions:
-      contents: write  # Asegura que GitHub Actions pueda escribir en el repositorio
+  increment_version:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout del repositorio
-      uses: actions/checkout@v3  # Obtiene el código fuente del repositorio
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    - name: Leer la versión actual
-      id: read-version
+    - name: Increment Version
       run: |
-        if [ ! -f VERSION ]; then
-          echo "1.0.0" > VERSION  # Si no existe el archivo VERSION, lo crea con la versión 1.0.0
-        fi
-        echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV  # Exporta la versión actual como variable de entorno
-      shell: bash
-
-    - name: Incrementar la versión
-      id: bump-version
-      run: |
+        # Leer la versión actual
         CURRENT_VERSION=$(cat VERSION)
         echo "Versión actual: $CURRENT_VERSION"
-        IFS='.' read -r -a VERSION_PARTS <<< "$CURRENT_VERSION"  # Divide la versión en partes (mayor, menor, parche)
-        PATCH=${VERSION_PARTS[2]}  # Extrae el número de parche
-        PATCH=$((PATCH + 1))  # Incrementa el número de parche
-        NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"  # Genera la nueva versión
+        
+        # Descomponer la versión en partes (mayor, menor, parche)
+        IFS='.' read -r -a VERSION_PARTS <<< "$CURRENT_VERSION"
+        PATCH=${VERSION_PARTS[2]}
+        
+        # Incrementar el número de parche
+        PATCH=$((PATCH + 1))
+        
+        # Crear la nueva versión
+        NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
         echo "Nueva versión: $NEW_VERSION"
-        echo $NEW_VERSION > VERSION  # Guarda la nueva versión en el archivo VERSION
-        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV  # Exporta la nueva versión como variable de entorno
-      shell: bash
-
-    - name: Sincronizar con el repositorio remoto
+        
+        # Guardar la nueva versión en el archivo VERSION
+        echo $NEW_VERSION > VERSION
+        
+    - name: Commit and Push version change
       run: |
-        git config user.name "github-actions[bot]"  # Configura el nombre de usuario para Git
-        git config user.email "github-actions[bot]@users.noreply.github.com"  # Configura el correo del bot
-        git pull origin main  # Realiza un 'git pull' para obtener los últimos cambios del repositorio remoto
-        git remote set-url origin https://github.com/${{ github.repository }}  # Establece la URL remota del repositorio
-        git add VERSION  # Añade el archivo VERSION al commit
-        git commit -m "Actualización de la versión a ${{ env.NEW_VERSION }}"  # Crea un commit con la nueva versión
-        git push origin main  # Realiza el push de los cambios al repositorio remoto
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add VERSION
+        git commit -m "Increment version to $NEW_VERSION"
+        git push
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Utiliza el token de GitHub para autenticarse
-      shell: bash
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
