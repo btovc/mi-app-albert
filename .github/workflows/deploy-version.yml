@@ -1,38 +1,49 @@
-name: Actualizar versión y changelog en deployment.yaml
+name: Actualizar versión y sincronizar con ArgoCD
 
 on:
   push:
     paths:
-      - 'VERSION'
-      - 'manifests/**'
+      - 'manifests/**'  # Activar solo cuando cambien archivos dentro de manifests/
+      - 'VERSION'       # Activar si cambia el archivo VERSION
 
 jobs:
-  update-deployment:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Chequear el código
+    - name: Checar el código
       uses: actions/checkout@v3
 
-    - name: Leer la versión desde el archivo VERSION
-      id: version
+    - name: Obtener versión actual
+      id: get-version
       run: |
-        VERSION=$(cat VERSION)
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        if [ -f VERSION ]; then
+          echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+        else
+          echo "VERSION=1.0.0" >> $GITHUB_ENV
 
-    - name: Crear changelog dinámico (opcional)
-      id: changelog
+    - name: Incrementar versión
+      id: bump-version
       run: |
-        echo "Actualización a la versión ${{ env.VERSION }}: Mejora en la carga de imágenes y optimización de la página de inicio." > changelog.txt
-        echo "Changelog generado: $(cat changelog.txt)"
+        OLD_VERSION=${{ env.VERSION }}
+        IFS='.' read -r -a PARTS <<< "$OLD_VERSION"
+        PATCH=$((PARTS[2] + 1))
+        NEW_VERSION="${PARTS[0]}.${PARTS[1]}.$PATCH"
+        echo "$NEW_VERSION" > VERSION
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-    - name: Hacer commit y push de los cambios
+    - name: Actualizar deployment.yaml con la nueva versión
+      run: |
+        sed -i "s/nginx:.*/nginx:${{ env.NEW_VERSION }}/" manifests/deployment.yaml
+
+    - name: Hacer commit y push de la nueva versión
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add manifests/deployment.yaml
-        git commit -m "Actualización a la versión ${{ env.VERSION }} con cambios."
-        git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }} --token ${{ secrets.GH_TOKEN }}
+        git add VERSION manifests/deployment.yaml
+        git commit -m "Bump version to ${{ env.NEW_VERSION }}"
+        git push
+
 
 
 
