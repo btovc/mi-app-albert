@@ -31,6 +31,10 @@ jobs:
         sed -i "s/version: .*/version: ${{ env.VERSION }}/" manifests/deployment.yaml
         sed -i "s/changelog: .*/changelog: '$(cat changelog.txt)'/" manifests/deployment.yaml
 
+    - name: Actualizar repositorio local
+      run: |
+        git pull origin main  # Aseguramos que el repositorio esté actualizado
+
     - name: Hacer commit y push de los cambios
       run: |
         git config user.name "github-actions[bot]"
@@ -39,5 +43,6 @@ jobs:
         git commit -m "Actualización a la versión ${{ env.VERSION }} con cambios."
         git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # El token se pasa de manera segura
+
 
