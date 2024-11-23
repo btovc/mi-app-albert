@@ -1,0 +1,35 @@
+name: Actualizar versión en deployment.yaml
+
+on:
+  push:
+    paths:
+      - 'VERSION'
+      - 'manifests/**'  # Para asegurarse de que si cambian los manifiestos, también se actualice.
+
+jobs:
+  update-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Chequear el código
+      uses: actions/checkout@v3
+
+    - name: Leer la versión desde el archivo VERSION
+      id: version
+      run: |
+        VERSION=$(cat VERSION)
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Actualizar el deployment.yaml con la nueva versión
+      run: |
+        sed -i "s/version: .*/version: ${{ env.VERSION }}/" manifests/deployment.yaml
+        sed -i "s/changelog: .*/changelog: 'Actualización a la versión ${{ env.VERSION }}. Cambios: ...'/" manifests/deployment.yaml
+
+    - name: Hacer commit y push de los cambios
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add manifests/deployment.yaml
+        git commit -m "Actualización a la versión ${{ env.VERSION }} con cambios."
+        git push
+
