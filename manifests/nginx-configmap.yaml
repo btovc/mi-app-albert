@@ -69,7 +69,7 @@ data:
 
     <div class="container">
         <div class="content">
-            <h3>Bienvenido a mi proyecto </h3>
+            <h3>Bienvenido a mi proyecto</h3>
             <p>Esta página ha sido desplegada en un clúster de <strong> Kubernetes </strong> utilizando <strong> ArgoCD </strong> y está alojada en <strong> GitHub </strong>.</p>
             <p>Visita el repositorio en GitHub para acceder a la <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación completa y la descarga de la aplicación</a>.</p>
 
