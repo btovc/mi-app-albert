@@ -74,13 +74,17 @@ data:
             <p>Visita el repositorio en GitHub para acceder a la <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación completa y la descarga de la aplicación</a>.</p>
             <p>Argo es un conjunto de herramientas open-source diseñadas para mejorar la entrega continua y la automatización de procesos en Kubernetes. Originado por Applatix (ahora parte de Intuit),
             Argo ha evolucionado para ser una solución robusta y versátil, respaldada por la Cloud Native Computing </p>
-            <h3>Ventajas de usar Argocd</h3>
-            <p>
-    Automatización y simplificación: simplifica y automatiza los despliegues, reduciendo errores y tiempo de implementación.
-    Eficiencia operacional: mejora la eficiencia operativa al automatizar tareas repetitivas y complejas.
-    Flexibilidad y adaptabilidad: se adapta a diversas necesidades, permitiendo configuraciones personalizadas.
-    Facilita GitOps: promueve las prácticas de GitOps, mejorando el control y seguimiento de configuraciones y despliegues.
+     <h3>Ventajas de usar ArgoCD</h3>
+<p>
+    <ul>
+        <li><strong>Automatización y simplificación:</strong> simplifica y automatiza los despliegues, reduciendo errores y tiempo de implementación.</li>
+        <li><strong>Eficiencia operacional:</strong> mejora la eficiencia operativa al automatizar tareas repetitivas y complejas.</li>
+        <li><strong>Flexibilidad y adaptabilidad:</strong> se adapta a diversas necesidades, permitiendo configuraciones personalizadas.</li>
+        <li><strong>Facilita GitOps:</strong> promueve las prácticas de GitOps, mejorando el control y seguimiento de configuraciones y despliegues.</li>
+    </ul>
 </p>
+<p>Para más información sobre ArgoCD, visita su <a href="https://argo-cd.readthedocs.io/" target="_blank">documentación oficial</a>.</p>
+
         </div>
     </div>
 
