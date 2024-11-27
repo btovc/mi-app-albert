@@ -77,6 +77,12 @@ data:
      <h3>Ventajas de usar ArgoCD</h3>
 
 
+        <li><strong>Automatización y simplificación:</strong> simplifica y automatiza los despliegues, reduciendo errores y tiempo de implementación.</li>
+        <li><strong>Eficiencia operacional:</strong> mejora la eficiencia operativa al automatizar tareas repetitivas y complejas.</li>
+        <li><strong>Flexibilidad y adaptabilidad:</strong> se adapta a diversas necesidades, permitiendo configuraciones personalizadas.</li>
+        <li><strong>Facilita GitOps:</strong> promueve las prácticas de GitOps, mejorando el control y seguimiento de configuraciones y despliegues.</li>
+   
+
         </div>
     </div>
 
