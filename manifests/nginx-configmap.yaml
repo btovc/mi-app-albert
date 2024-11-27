@@ -72,23 +72,10 @@ data:
             <h3>Bienvenido a mi proyecto</h3>
             <p>Esta página ha sido desplegada en un clúster de <strong> Kubernetes </strong> utilizando <strong> ArgoCD </strong> y está alojada en <strong> GitHub </strong>.</p>
             <p>Visita el repositorio en GitHub para acceder a la <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación completa y la descarga de la aplicación</a>.</p>
-
-            <h3>¿Qué es Kubernetes?</h3>
-            <p>Kubernetes es un sistema de gestión de contenedores que permite automatizar el despliegue, escalado y la operación de aplicaciones en contenedores. Proporciona herramientas para gestionar clústeres de contenedores, asegurando que las aplicaciones estén disponibles y escalables según la demanda.</p>
-            
-            <h3>Ventajas de usar Kubernetes</h3>
-            <ul>
-                <li><strong>Escalabilidad:</strong> Permite escalar aplicaciones de manera eficiente según la demanda.</li>
-                <li><strong>Alta disponibilidad:</strong> Garantiza que las aplicaciones estén siempre disponibles.</li>
-                <li><strong>Despliegue simplificado:</strong> Facilita el proceso de despliegue y actualización de aplicaciones.</li>
-                <li><strong>Gestión de recursos:</strong> Optimiza el uso de recursos del sistema.</li>
-            </ul>
             
             <h3>Demostración</h3>
             <p>En esta página, podrás ver una demostración básica de una aplicación web desplegada en Kubernetes, que muestra cómo se puede gestionar una aplicación en un clúster de Kubernetes.</p>
             
-            <h3>Explora más sobre Kubernetes</h3>
-            <p>Puedes visitar la <a href="https://kubernetes.io/" target="_blank">documentación oficial de Kubernetes</a> para más información y tutoriales.</p>
         </div>
     </div>
 
