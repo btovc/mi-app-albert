@@ -70,19 +70,19 @@ data:
     <div class="container">
         <div class="content">
             <h3>Bienvenido a mi proyecto</h3>
-            <p>Esta página ha sido desplegada en un clúster de <strong>Kubernetes</strong> utilizando <strong>ArgoCD</strong> y está alojada en <strong>GitHub</strong>.</p>
+            <p>Esta página ha sido desplegada en un clúster de <strong> Kubernetes </strong> utilizando <strong> ArgoCD </strong> y está alojada en <strong> GitHub </strong>.</p>
             <p>Visita el repositorio en GitHub para acceder a la <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación completa y la descarga de la aplicación</a>.</p>
-            <p>Argo es un conjunto de herramientas open-source diseñadas para mejorar la entrega continua y la automatización de procesos en Kubernetes. Originado por Applatix (ahora parte de Intuit), 
-            Argo ha evolucionado para ser una solución robusta y versátil, respaldada por la Cloud Native Computing Foundation (CNCF).</p>
+            <p>Argo es un conjunto de herramientas open-source diseñadas para mejorar la entrega continua y la automatización de procesos en Kubernetes. Originado por Applatix (ahora parte de Intuit),
+            Argo ha evolucionado para ser una solución robusta y versátil, respaldada por la Cloud Native Computing </p>
+     <h3>Ventajas de usar ArgoCD</h3>
 
-            <h3>Ventajas de usar ArgoCD</h3>
-            <ul>
-                <li><strong>Automatización y simplificación:</strong> simplifica y automatiza los despliegues, reduciendo errores y tiempo de implementación.</li>
-                <li><strong>Eficiencia operacional:</strong> mejora la eficiencia operativa al automatizar tareas repetitivas y complejas.</li>
-                <li><strong>Flexibilidad y adaptabilidad:</strong> se adapta a diversas necesidades, permitiendo configuraciones personalizadas.</li>
-                <li><strong>Facilita GitOps:</strong> promueve las prácticas de GitOps, mejorando el control y seguimiento de configuraciones y despliegues.</li>
-            </ul>
-            <p>Para más información sobre ArgoCD, visita su <a href="https://argo-cd.readthedocs.io/" target="_blank">documentación oficial</a>.</p>
+
+        <li><strong>Automatización y simplificación:</strong> simplifica y automatiza los despliegues, reduciendo errores y tiempo de implementación.</li>
+        <li><strong>Eficiencia operacional:</strong> mejora la eficiencia operativa al automatizar tareas repetitivas y complejas.</li>
+        <li><strong>Flexibilidad y adaptabilidad:</strong> se adapta a diversas necesidades, permitiendo configuraciones personalizadas.</li>
+        <li><strong>Facilita GitOps:</strong> promueve las prácticas de GitOps, mejorando el control y seguimiento de configuraciones y despliegues.</li>
+   
+
         </div>
     </div>
 
@@ -92,5 +92,4 @@ data:
 
     </body>
     </html>
-
 
