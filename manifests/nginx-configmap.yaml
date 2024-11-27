@@ -74,8 +74,7 @@ data:
             <p>Visita el repositorio en GitHub para acceder a la <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación completa y la descarga de la aplicación</a>.</p>
             <p>Argo es un conjunto de herramientas open-source diseñadas para mejorar la entrega continua y la automatización de procesos en Kubernetes. Originado por Applatix (ahora parte de Intuit),
             Argo ha evolucionado para ser una solución robusta y versátil, respaldada por la Cloud Native Computing </p>
-            <h3>Demostración</h3>
-            <p>En esta página, podrás ver una demostración básica de una aplicación web desplegada en Kubernetes, que muestra cómo se puede gestionar una aplicación en un clúster de Kubernetes.</p> 
+            <h3>Ventajas de usar Argocd</h3>
             <p>
     Automatización y simplificación: simplifica y automatiza los despliegues, reduciendo errores y tiempo de implementación.
     Eficiencia operacional: mejora la eficiencia operativa al automatizar tareas repetitivas y complejas.
