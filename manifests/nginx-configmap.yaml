@@ -74,8 +74,7 @@ data:
             <p>Visita el repositorio en GitHub para acceder a la <a href="https://github.com/btovc/mi-app-albert/" target="_blank">documentación completa y la descarga de la aplicación</a>.</p>
             
             <h3>Demostración</h3>
-            <p>En esta página, podrás ver una demostración básica de una aplicación web desplegada en Kubernetes, que muestra cómo se puede gestionar una aplicación en un clúster de Kubernetes.</p>
-            
+            <p>En esta página, podrás ver una demostración básica de una aplicación web desplegada en Kubernetes, que muestra cómo se puede gestionar una aplicación en un clúster de Kubernetes.</p> 
         </div>
     </div>
 
