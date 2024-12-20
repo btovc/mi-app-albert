@@ -9,5 +9,5 @@ spec:
     - protocol: TCP
       port: 80        # Puerto interno del clúster
       targetPort: 80  # Puerto del contenedor
-      nodePort: 30008 # Puerto externo del nodo (opcional)
+      nodePort: 30084 # Puerto externo del nodo (opcional)
   type: NodePort      # Cambiamos el tipo de servicio
