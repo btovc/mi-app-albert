@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mi-app
+  name: mi-app-albert
   labels:
     app: nginx
     version: "v1.0.0"
