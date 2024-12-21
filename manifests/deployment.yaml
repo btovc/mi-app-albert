@@ -22,7 +22,7 @@ spec:
         - containerPort: 80
         resources:
             limits:
-              cpu: "2"
+              cpu: "4"
               memory: "100Mi"
         volumeMounts:
         - name: nginx-html
