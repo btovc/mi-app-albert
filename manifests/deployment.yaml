@@ -22,8 +22,8 @@ spec:
         - containerPort: 80
         resources:
             limits:
-              cpu: "1"
-              memory: "50Mi"
+              cpu: "2"
+              memory: "100Mi"
         volumeMounts:
         - name: nginx-html
           mountPath: /usr/share/nginx/html  # Ruta estándar donde Nginx espera los archivos
