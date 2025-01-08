@@ -21,9 +21,12 @@ spec:
         ports:
         - containerPort: 80
         resources:
-            limits:
-              cpu: "4"
-              memory: "100Mi"
+          requests:
+            cpu: "250m"  # Solicitar solo 0.25 CPUs
+            memory: "50Mi"  # Solicitar 50Mi de memoria
+          limits:
+            cpu: "500m"  # Limitar a un máximo de 0.5 CPUs
+            memory: "100Mi"  # Limitar a 100Mi de memoria
         volumeMounts:
         - name: nginx-html
           mountPath: /usr/share/nginx/html  # Ruta estándar donde Nginx espera los archivos
@@ -31,6 +34,7 @@ spec:
       - name: nginx-html
         configMap:
           name: nginx-html  # ConfigMap que contiene el archivo index.html
+
 
 
 
